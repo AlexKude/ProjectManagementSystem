@@ -2,9 +2,8 @@ package ua.goit.model;
 
 import java.util.Date;
 
-/**
- * Created by Main Server on 16.12.2016.
- */
+
+
 public class Developer implements Model {
     private int delevoperId;
     private String surname;

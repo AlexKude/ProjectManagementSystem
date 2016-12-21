@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Created by Main Server on 19.12.2016.
- */
+
+
 public class PostgresDataSource {
     private static PostgresDataSource datasource;
     private ComboPooledDataSource source;

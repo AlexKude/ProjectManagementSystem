@@ -8,9 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
-/**
- * Created by Main Server on 16.12.2016.
- */
+
+
 public class ConnectDao {
 
    public static Connection connection;

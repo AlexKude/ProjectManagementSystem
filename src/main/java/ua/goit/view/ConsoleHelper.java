@@ -6,9 +6,8 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 
 
-/**
- * Created by Main Server on 16.12.2016.
- */
+
+
 public class ConsoleHelper {
 
     public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

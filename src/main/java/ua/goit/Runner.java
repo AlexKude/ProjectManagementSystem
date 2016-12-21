@@ -12,9 +12,8 @@ import ua.goit.view.ConsoleHelper;
 import java.io.IOException;
 
 
-/**
- * Created by Main Server on 18.12.2016.
- */
+
+
 public class Runner {
     public static void main(String[] args) {
         ConnectDao.ConnectDB();

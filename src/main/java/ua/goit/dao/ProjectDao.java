@@ -11,9 +11,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Main Server on 18.12.2016.
- */
+
+
 public class ProjectDao implements ModelDao {
     @Override
     public void selectAllElements() {

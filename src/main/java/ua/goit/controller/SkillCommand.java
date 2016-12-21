@@ -10,9 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Main Server on 18.12.2016.
- */
+
+
 public class SkillCommand implements Command {
     @Override
     public void execute() {
