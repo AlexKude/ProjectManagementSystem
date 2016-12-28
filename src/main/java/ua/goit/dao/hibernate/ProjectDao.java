@@ -47,6 +47,7 @@ public class ProjectDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Project was successfully created!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -60,6 +61,7 @@ public class ProjectDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Project was successfully updated!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -74,6 +76,7 @@ public class ProjectDao<ModelObject> implements ModelDao<ModelObject> {
             ProjectEntity project = manager.find(ProjectEntity.class, id);
             manager.remove(project);
             tx.commit();
+            ConsoleHelper.writeMessage("Project was successfully deleted!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();

@@ -48,6 +48,7 @@ public class CompanyDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Company was successfully created!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -61,6 +62,7 @@ public class CompanyDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Company was successfully updated!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -75,6 +77,7 @@ public class CompanyDao<ModelObject> implements ModelDao<ModelObject> {
             CompanyEntity company = manager.find(CompanyEntity.class, id);
             manager.remove(company);
             tx.commit();
+            ConsoleHelper.writeMessage("Company was successfully deleted!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();

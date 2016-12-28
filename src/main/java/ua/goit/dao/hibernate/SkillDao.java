@@ -47,6 +47,7 @@ public class SkillDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Skill was successfully created!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -60,6 +61,7 @@ public class SkillDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Skill was successfully updated!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -74,6 +76,7 @@ public class SkillDao<ModelObject> implements ModelDao<ModelObject> {
             SkillEntity skill = manager.find(SkillEntity.class, id);
             manager.remove(skill);
             tx.commit();
+            ConsoleHelper.writeMessage("Skill was successfully deleted!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();

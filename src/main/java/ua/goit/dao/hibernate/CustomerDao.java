@@ -47,6 +47,7 @@ public class CustomerDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Customer was successfully created!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -60,6 +61,7 @@ public class CustomerDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Customer was successfully updated!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -74,6 +76,7 @@ public class CustomerDao<ModelObject> implements ModelDao<ModelObject> {
             CustomerEntity customer = manager.find(CustomerEntity.class, id);
             manager.remove(customer);
             tx.commit();
+            ConsoleHelper.writeMessage("Customer was successfully deleted!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();

@@ -47,6 +47,7 @@ public class DeveloperDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Developer was successfully created!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -60,6 +61,7 @@ public class DeveloperDao<ModelObject> implements ModelDao<ModelObject> {
         try {
             manager.merge(object);
             tx.commit();
+            ConsoleHelper.writeMessage("Developer was successfully updated!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
@@ -74,6 +76,7 @@ public class DeveloperDao<ModelObject> implements ModelDao<ModelObject> {
             DeveloperEntity developer = manager.find(DeveloperEntity.class, id);
             manager.remove(developer);
             tx.commit();
+            ConsoleHelper.writeMessage("Developer was successfully deleted!");
         } catch (Exception e) {
             ConsoleHelper.writeMessage("Query failed. Please try again....");
             tx.rollback();
