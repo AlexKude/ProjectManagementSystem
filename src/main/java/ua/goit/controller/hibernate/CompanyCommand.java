@@ -31,6 +31,7 @@ public class CompanyCommand implements Command {
                     company.setCompanyAddress(ConsoleHelper.readString());
                     factory.createElement(company);
                     break;
+
                 case 2:
                     ConsoleHelper.writeMessage("Type company Id which you like to delete:");
                     id = ConsoleHelper.readInt();
