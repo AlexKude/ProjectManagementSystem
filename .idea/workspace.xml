@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1243c887-ddf3-4733-be88-3dd5351c9f4e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/CustomerCommand.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/CustomerCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/DeveloperCommand.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/DeveloperCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/ProjectCommand.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/controller/hibernate/ProjectCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/CompanyEntity.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/CompanyEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/CustomerEntity.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/CustomerEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/DeveloperEntity.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/DeveloperEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/ProjectEntity.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/ProjectEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/SkillEntity.java" afterPath="$PROJECT_DIR$/src/main/java/ua/goit/model/hibernate/SkillEntity.java" />
     </list>
     <ignored path="ProjectManagementSystem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -895,7 +887,7 @@
       <workItem from="1483298895460" duration="315000" />
       <workItem from="1483417935843" duration="891000" />
       <workItem from="1483420763293" duration="4240000" />
-      <workItem from="1483462732819" duration="2995000" />
+      <workItem from="1483462732819" duration="3050000" />
     </task>
     <task id="LOCAL-00001" summary="CRUD project">
       <created>1482278771857</created>
@@ -946,11 +938,18 @@
       <option name="project" value="LOCAL" />
       <updated>1483418622588</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Hibernate update">
+      <created>1483465790787</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1483465790787</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101109000" />
+    <option name="totallyTimeSpent" value="101164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="0" />
@@ -1056,7 +1055,8 @@
     <MESSAGE value="CRUD project Hibernate New Update" />
     <MESSAGE value="CRUD project Hibernate Update 2017" />
     <MESSAGE value="CRUD project Hibernate Update 2017 January" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD project Hibernate Update 2017 January" />
+    <MESSAGE value="Hibernate update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hibernate update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1343,6 +1343,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
