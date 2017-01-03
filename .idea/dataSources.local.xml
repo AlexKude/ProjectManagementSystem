@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - company@localhost" uuid="184123ed-d486-4318-ae34-cae3ead2846a">
+      <database-info product="PostgreSQL" version="8.4.20" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <resolve-scope>company:postgres,public</resolve-scope>
+    </data-source>
+    <data-source name="NewPersistenceUnit/Hibernate" uuid="7a9aed2e-c755-4d61-8284-2fc2af8e8a58">
+      <database-info product="PostgreSQL" version="8.4.20" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>postgres</user-name>
+      <user-password>dfdadfc5dfd9dfdedfcddfd8dfcfdfd9</user-password>
+      <resolve-scope>company:postgres,public</resolve-scope>
+    </data-source>
+  </component>
+</project>
