@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Entity
@@ -18,7 +18,7 @@ import java.util.List;
 public class SkillEntity implements ModelEntity {
     private int id;
     private String skillName;
-    List<DeveloperEntity> developerList;
+    Set<DeveloperEntity> developerSet;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "skills_seq")
@@ -43,12 +43,12 @@ public class SkillEntity implements ModelEntity {
     }
 
     @ManyToMany(mappedBy = "skills")
-    public List<DeveloperEntity> getDeveloperList() {
-        return developerList;
+    public Set<DeveloperEntity> getDeveloperSet() {
+        return developerSet;
     }
 
-    public void setDeveloperList(List<DeveloperEntity> developerList) {
-        this.developerList = developerList;
+    public void setDeveloperSet(Set<DeveloperEntity> developerSet) {
+        this.developerSet = developerSet;
     }
 
     @Override

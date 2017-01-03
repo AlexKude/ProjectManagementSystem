@@ -1,6 +1,5 @@
 package ua.goit.model.hibernate;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.util.List;
-
+import java.util.Set;
 
 
 @Entity
@@ -21,8 +19,8 @@ import java.util.List;
 public class ProjectEntity implements ModelEntity {
     private int id;
     private String projectName;
-    List<CustomerEntity> customerList;
-    List<DeveloperEntity> developerList;
+    Set<CustomerEntity> customerSet;
+    Set<DeveloperEntity> developerSet;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "projects_seq")
@@ -46,25 +44,25 @@ public class ProjectEntity implements ModelEntity {
     }
 
 
-    @ManyToMany(mappedBy = "projectList")
-    public List<CustomerEntity> getCustomerList() {
-        return customerList;
+    @ManyToMany(mappedBy = "projectSet")
+    public Set<CustomerEntity> getCustomerSet() {
+        return customerSet;
     }
 
-    public void setCustomerList(List<CustomerEntity> customerList) {
-        this.customerList = customerList;
+    public void setCustomerSet(Set<CustomerEntity> customerSet) {
+        this.customerSet = customerSet;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "projects_developers",
             joinColumns = @JoinColumn(name = "projects",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "developers",referencedColumnName = "id"))
-    public List<DeveloperEntity> getDeveloperList() {
-        return developerList;
+    public Set<DeveloperEntity> getDeveloperSet() {
+        return developerSet;
     }
 
-    public void setDeveloperList(List<DeveloperEntity> developerList) {
-        this.developerList = developerList;
+    public void setDeveloperSet(Set<DeveloperEntity> developerSet) {
+        this.developerSet = developerSet;
     }
 
     @Override
@@ -92,6 +90,6 @@ public class ProjectEntity implements ModelEntity {
         return "Project : " +
                 "id : " + id +
                 ", Name : " + projectName + '\'' +
-                ", Developers which working on : " + developerList;
+                ", Developers which working on : " + developerSet;
     }
 }

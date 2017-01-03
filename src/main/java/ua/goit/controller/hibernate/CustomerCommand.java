@@ -3,15 +3,18 @@ package ua.goit.controller.hibernate;
 import ua.goit.dao.hibernate.CompanyDao;
 import ua.goit.dao.hibernate.CustomerDao;
 import ua.goit.dao.hibernate.ModelDao;
+import ua.goit.dao.hibernate.ProjectDao;
 import ua.goit.factory.hibernate.CustomerFactory;
 import ua.goit.factory.hibernate.ModelFactory;
 import ua.goit.model.hibernate.CompanyEntity;
 import ua.goit.model.hibernate.CustomerEntity;
+import ua.goit.model.hibernate.ProjectEntity;
 import ua.goit.view.ConsoleHelper;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 public class CustomerCommand implements Command {
@@ -19,12 +22,15 @@ public class CustomerCommand implements Command {
     public void execute() {
         ModelFactory factory = new CustomerFactory();
         ModelDao<CustomerEntity> dao = new CustomerDao();
-
+        Set<ProjectEntity> projectsSelected;
         CustomerEntity customer = new CustomerEntity();
-        CompanyEntity company = null;
+        CompanyEntity company;
 
         int id;
         int companyId;
+        int projectId;
+        Set<Integer> projectsId = new HashSet<>();
+
         ConsoleHelper.writeMessage("* * * CUSTOMERS * * *" + "\n" +
                 "1 - CREATE | 2 - DELETE | 3 - UPDATE | 4 - SHOW ALL CUSTOMERS | 5 - SHOW SELECTED CUSTOMERS\n");
         try {
@@ -42,12 +48,31 @@ public class CustomerCommand implements Command {
                     company = checkForeignKey(companyId);
                     if (company != null) {
                         customer.setCompany(company);
-                        factory.createElement(customer);
-                        break;
                     } else {
                         ConsoleHelper.writeMessage("Company with typed id does not exists.Please try again...");
                         break;
                     }
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type customer project id OR type 0 if like to create customer");
+                        projectId = ConsoleHelper.readInt();
+                        if (projectId != 0) {
+                            projectsId.add(projectId);
+                        } else {
+                            break;
+                        }
+                    }
+                    if (!projectsId.isEmpty()) {
+                        projectsSelected = checkJoinElements(projectsId);
+                        if (projectsSelected != null) {
+                            customer.setProjectSet(projectsSelected);
+                            factory.createElement(customer);
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                    factory.createElement(customer);
+                    break;
                 case 2:
                     ConsoleHelper.writeMessage("Type customer Id which you like to delete:");
                     id = ConsoleHelper.readInt();
@@ -67,12 +92,31 @@ public class CustomerCommand implements Command {
                     company = checkForeignKey(companyId);
                     if (company != null) {
                         customer.setCompany(company);
-                        dao.updateElement(customer);
-                        break;
                     } else {
                         ConsoleHelper.writeMessage("Company with typed id does not exists.Please try again...");
                         break;
                     }
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type customer project id OR type 0 if like to update customer");
+                        projectId = ConsoleHelper.readInt();
+                        if (projectId != 0) {
+                            projectsId.add(projectId);
+                        } else {
+                            break;
+                        }
+                    }
+                    if (!projectsId.isEmpty()) {
+                        projectsSelected = checkJoinElements(projectsId);
+                        if (projectsSelected != null) {
+                            customer.setProjectSet(projectsSelected);
+                            dao.updateElement(customer);
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                    dao.updateElement(customer);
+                    break;
                 case 4:
                     List<CustomerEntity> customerList = dao.selectAllElements();
                     for (CustomerEntity customerEntity : customerList) {
@@ -107,5 +151,28 @@ public class CustomerCommand implements Command {
             }
         }
         return null;
+    }
+
+    private Set<ProjectEntity> checkJoinElements (Set<Integer> projectsId) {
+        boolean flag = false;
+        ModelDao joinElements = new ProjectDao();
+        Set<ProjectEntity> projectSelected = new HashSet<>();
+        List<ProjectEntity> projectList = joinElements.selectAllElements();
+        if (projectList == null || projectList.isEmpty()) {
+            return null;
+        }
+        for (Integer integer : projectsId) {
+            for (ProjectEntity project : projectList) {
+                if (integer.equals(project.getId())) {
+                    projectSelected.add(project);
+                    flag = true;
+                }
+            }
+            if (flag == false) {
+                ConsoleHelper.writeMessage("Project with id : " + integer + " does not exists!");
+                return null;
+            }
+        }
+        return projectSelected;
     }
 }

@@ -3,15 +3,18 @@ package ua.goit.controller.hibernate;
 import ua.goit.dao.hibernate.CompanyDao;
 import ua.goit.dao.hibernate.DeveloperDao;
 import ua.goit.dao.hibernate.ModelDao;
+import ua.goit.dao.hibernate.SkillDao;
 import ua.goit.factory.hibernate.DeveloperFactory;
 import ua.goit.factory.hibernate.ModelFactory;
 import ua.goit.model.hibernate.CompanyEntity;
 import ua.goit.model.hibernate.DeveloperEntity;
+import ua.goit.model.hibernate.SkillEntity;
 import ua.goit.view.ConsoleHelper;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 public class DeveloperCommand implements Command {
@@ -19,12 +22,15 @@ public class DeveloperCommand implements Command {
     public void execute() {
         ModelFactory factory = new DeveloperFactory();
         ModelDao<DeveloperEntity> dao = new DeveloperDao();
-
+        Set<SkillEntity> skillSelected;
         DeveloperEntity developer = new DeveloperEntity();
-        CompanyEntity company = null;
+        CompanyEntity company;
 
         int id;
         int companyId;
+        int skillId;
+        Set<Integer> skillsId = new HashSet<>();
+
         ConsoleHelper.writeMessage("* * * DEVELOPERS * * *" + "\n" +
                 "1 - CREATE | 2 - DELETE | 3 - UPDATE | 4 - SHOW ALL DEVELOPERS | 5 - SHOW SELECTED DEVELOPER\n");
         try {
@@ -50,12 +56,31 @@ public class DeveloperCommand implements Command {
                     company = checkForeignKey(companyId);
                     if (company != null) {
                         developer.setCompany(company);
-                        factory.createElement(developer);
-                        break;
                     } else {
                         ConsoleHelper.writeMessage("Company with typed id does not exists.Please try again...");
                         break;
                     }
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type developer skill id OR type 0 if like to create developer");
+                        skillId = ConsoleHelper.readInt();
+                        if (skillId != 0) {
+                            skillsId.add(skillId);
+                        } else {
+                            break;
+                        }
+                    }
+                    if (!skillsId.isEmpty()) {
+                        skillSelected = checkJoinElements(skillsId);
+                        if (skillSelected != null) {
+                            developer.setSkills(skillSelected);
+                            factory.createElement(developer);
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                    factory.createElement(developer);
+                    break;
                 case 2:
                     ConsoleHelper.writeMessage("Type developer Id which you like to delete:");
                     id = ConsoleHelper.readInt();
@@ -83,12 +108,31 @@ public class DeveloperCommand implements Command {
                     company = checkForeignKey(companyId);
                     if (company != null) {
                         developer.setCompany(company);
-                        factory.createElement(developer);
-                        break;
                     } else {
                         ConsoleHelper.writeMessage("Company with typed id does not exists.Please try again...");
                         break;
                     }
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type developer skill id OR type 0 if like to update developer");
+                        skillId = ConsoleHelper.readInt();
+                        if (skillId != 0) {
+                            skillsId.add(skillId);
+                        } else {
+                            break;
+                        }
+                    }
+                    if (!skillsId.isEmpty()) {
+                        skillSelected = checkJoinElements(skillsId);
+                        if (skillSelected != null) {
+                            developer.setSkills(skillSelected);
+                            dao.updateElement(developer);
+                            break;
+                        } else {
+                            break;
+                        }
+                    }
+                    dao.updateElement(developer);
+                    break;
                 case 4:
                     List<DeveloperEntity> developerList = dao.selectAllElements();
                     for (DeveloperEntity developerEntity : developerList) {
@@ -125,5 +169,28 @@ public class DeveloperCommand implements Command {
             }
         }
         return null;
+    }
+
+    private Set<SkillEntity> checkJoinElements (Set<Integer> skillsId) {
+        boolean flag = false;
+        ModelDao joinElements = new SkillDao();
+        Set<SkillEntity> skillSelected = new HashSet<>();
+        List<SkillEntity> skillList = joinElements.selectAllElements();
+        if (skillList == null || skillList.isEmpty()) {
+            return null;
+        }
+        for (Integer integer : skillsId) {
+            for (SkillEntity skill : skillList) {
+                if (integer.equals(skill.getId())) {
+                    skillSelected.add(skill);
+                    flag = true;
+                }
+            }
+            if (flag == false) {
+                ConsoleHelper.writeMessage("Skill with id : " + integer + " does not exists!");
+                return null;
+            }
+        }
+        return skillSelected;
     }
 }

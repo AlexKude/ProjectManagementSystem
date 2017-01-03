@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Entity
@@ -18,8 +18,8 @@ public class CompanyEntity implements ModelEntity {
     private int id;
     private String companyName;
     private String companyAddress;
-    private List<CustomerEntity> customerList;
-    private List<DeveloperEntity> developerList;
+    private Set<CustomerEntity> customerSet;
+    private Set<DeveloperEntity> developerSet;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "companies_seq")
@@ -52,21 +52,21 @@ public class CompanyEntity implements ModelEntity {
     }
 
     @OneToMany(mappedBy = "company")
-    public List<CustomerEntity> getCustomerList() {
-        return customerList;
+    public Set<CustomerEntity> getCustomerSet() {
+        return customerSet;
     }
 
-    public void setCustomerList(List<CustomerEntity> customerList) {
-        this.customerList = customerList;
+    public void setCustomerSet(Set<CustomerEntity> customerList) {
+        this.customerSet = customerList;
     }
 
     @OneToMany(mappedBy = "company")
-    public List<DeveloperEntity> getDeveloperList() {
-        return developerList;
+    public Set<DeveloperEntity> getDeveloperSet() {
+        return developerSet;
     }
 
-    public void setDeveloperList(List<DeveloperEntity> developerList) {
-        this.developerList = developerList;
+    public void setDeveloperSet(Set<DeveloperEntity> developerList) {
+        this.developerSet = developerList;
     }
 
     @Override

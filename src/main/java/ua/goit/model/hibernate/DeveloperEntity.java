@@ -1,6 +1,5 @@
 package ua.goit.model.hibernate;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.sql.Date;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Entity
@@ -29,8 +28,8 @@ public class DeveloperEntity implements ModelEntity {
     private Date dateOfJoin;
     private String address;
     private CompanyEntity company;
-    List<SkillEntity> skills;
-    List<ProjectEntity> projectList;
+    Set<SkillEntity> skills;
+    Set<ProjectEntity> projectSet;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "developers_seq")
@@ -112,20 +111,20 @@ public class DeveloperEntity implements ModelEntity {
     @JoinTable(name = "developers_skills",
             joinColumns = @JoinColumn(name = "developers",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "skills",referencedColumnName = "id"))
-    public List<SkillEntity> getSkills() {
+    public Set<SkillEntity> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<SkillEntity> skills) {
+    public void setSkills(Set<SkillEntity> skills) {
         this.skills = skills;
     }
-    @ManyToMany(mappedBy = "developerList")
-    public List<ProjectEntity> getProjectList() {
-        return projectList;
+    @ManyToMany(mappedBy = "developerSet")
+    public Set<ProjectEntity> getProjectSet() {
+        return projectSet;
     }
 
-    public void setProjectList(List<ProjectEntity> projectList) {
-        this.projectList = projectList;
+    public void setProjectSet(Set<ProjectEntity> projectList) {
+        this.projectSet = projectList;
     }
 
     @Override

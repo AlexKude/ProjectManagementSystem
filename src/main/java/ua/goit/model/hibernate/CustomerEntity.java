@@ -1,6 +1,5 @@
 package ua.goit.model.hibernate;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Entity
@@ -25,7 +24,7 @@ public class CustomerEntity implements ModelEntity {
     private String name;
     private String fatherName;
     private CompanyEntity company;
-    private List<ProjectEntity> projectList;
+    private Set<ProjectEntity> projectSet;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customers_seq")
@@ -80,12 +79,12 @@ public class CustomerEntity implements ModelEntity {
     @JoinTable(name = "customers_projects",
             joinColumns = @JoinColumn(name = "customer",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project",referencedColumnName = "id"))
-    public List<ProjectEntity> getProjectList() {
-        return projectList;
+    public Set<ProjectEntity> getProjectSet() {
+        return projectSet;
     }
 
-    public void setProjectList(List<ProjectEntity> projectList) {
-        this.projectList = projectList;
+    public void setProjectSet(Set<ProjectEntity> projectList) {
+        this.projectSet = projectList;
     }
 
     @Override
@@ -122,6 +121,6 @@ public class CustomerEntity implements ModelEntity {
                 ", First Name : " + name + '\'' +
                 ", Father Name : " + fatherName + '\'' +
                 ", Company : " + company +
-                ", Projects : " + projectList;
+                ", Projects : " + projectSet;
     }
 }
