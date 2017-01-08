@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 

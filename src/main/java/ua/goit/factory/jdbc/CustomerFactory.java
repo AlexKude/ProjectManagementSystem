@@ -3,14 +3,11 @@ package ua.goit.factory.jdbc;
 import ua.goit.dao.jdbc.CustomerDao;
 import ua.goit.dao.jdbc.ModelDao;
 
-import java.util.List;
 
-
-
-public class CustomerFactory implements ModelFactory {
+public class CustomerFactory<ModelObject> implements ModelFactory<ModelObject> {
     @Override
-    public void createElement(List list) {
+    public void createElement(ModelObject object) {
         ModelDao modelDao = new CustomerDao();
-        modelDao.createElement(list);
+        modelDao.createElement(object);
     }
 }

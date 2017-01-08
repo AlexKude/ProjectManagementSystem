@@ -1,17 +1,21 @@
 package ua.goit.model.jdbc;
 
 
-import ua.goit.model.jdbc.Model;
+import java.util.Set;
 
 public class Project implements Model {
 
     private int projectId;
     private String projectName;
+    Set<Developer> developerSet;
 
+    public Project() {
+    }
 
-    public Project(int projectId, String projectName) {
+    public Project(int projectId, String projectName, Set<Developer> developerSet) {
         this.projectId = projectId;
         this.projectName = projectName;
+        this.developerSet = developerSet;
     }
 
     public int getProjectId() {
@@ -30,10 +34,19 @@ public class Project implements Model {
         this.projectName = projectName;
     }
 
+    public Set<Developer> getDeveloperSet() {
+        return developerSet;
+    }
+
+    public void setDeveloperSet(Set<Developer> developerSet) {
+        this.developerSet = developerSet;
+    }
+
     @Override
     public String toString() {
         return "Project : " +
                 "Id : " + projectId +
-                ", Title : "  + projectName + '\'';
+                ", Name : " + projectName + '\'' +
+                ", Developers who working on : " + developerSet;
     }
 }

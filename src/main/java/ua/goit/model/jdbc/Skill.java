@@ -1,11 +1,13 @@
 package ua.goit.model.jdbc;
 
 
-import ua.goit.model.jdbc.Model;
 
 public class Skill implements Model {
     private int skillId;
     private String skillName;
+
+    public Skill() {
+    }
 
     public Skill(int skillId, String skillName) {
         this.skillId = skillId;
@@ -32,6 +34,6 @@ public class Skill implements Model {
     public String toString() {
         return "Skill : " +
                 "Id : " + skillId +
-                ", Name : " + skillName + '\'';
+                ", Name : " + skillName;
     }
 }

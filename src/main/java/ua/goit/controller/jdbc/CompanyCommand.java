@@ -4,11 +4,11 @@ import ua.goit.dao.jdbc.CompanyDao;
 import ua.goit.dao.jdbc.ModelDao;
 import ua.goit.factory.jdbc.CompanyFactory;
 import ua.goit.factory.jdbc.ModelFactory;
+import ua.goit.model.jdbc.Company;
 import ua.goit.view.ConsoleHelper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 
@@ -20,7 +20,7 @@ public class CompanyCommand implements Command {
         ModelDao dao = new CompanyDao();
 
         int id;
-        List list = new ArrayList();
+        Company company = new Company();
         ConsoleHelper.writeMessage("* * * COMPANIES * * *" + "\n" +
                 "1 - CREATE | 2 - DELETE | 3 - UPDATE | 4 - SHOW ALL COMPANIES | 5 - SHOW SELECTED COMPANY\n");
         try {
@@ -28,10 +28,10 @@ public class CompanyCommand implements Command {
             switch (commandNumber) {
                 case 1:
                     ConsoleHelper.writeMessage("Type name of Company: ");
-                    list.add(ConsoleHelper.readString());
+                    company.setCompanyName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type address of Company:");
-                    list.add(ConsoleHelper.readString());
-                    factory.createElement(list);
+                    company.setCompanyAddress(ConsoleHelper.readString());
+                    factory.createElement(company);
                     break;
                 case 2:
                     ConsoleHelper.writeMessage("Type company Id which you like to delete:");
@@ -40,12 +40,12 @@ public class CompanyCommand implements Command {
                     break;
                 case 3:
                     ConsoleHelper.writeMessage("Type company Id which you like to update:");
-                    list.add(ConsoleHelper.readInt());
+                    company.setCompanyId(ConsoleHelper.readInt());
                     ConsoleHelper.writeMessage("Type name of Company:");
-                    list.add(ConsoleHelper.readString());
+                    company.setCompanyName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type address of Company:");
-                    list.add(ConsoleHelper.readString());
-                    dao.updateElement(list);
+                    company.setCompanyAddress(ConsoleHelper.readString());
+                    dao.updateElement(company);
 
                     break;
                 case 4:

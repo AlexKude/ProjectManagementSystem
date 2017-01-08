@@ -1,17 +1,16 @@
 package ua.goit.dao.jdbc;
 
-import java.util.List;
 
 
 
-public interface ModelDao {
+public interface ModelDao<ModelObject> {
     void selectAllElements();
 
     void selectElement(int id);
 
-    void createElement(List list);
+    void createElement(ModelObject object);
 
-    void updateElement(List list);
+    void updateElement(ModelObject object);
 
     void deleteElement(int id);
 }

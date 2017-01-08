@@ -1,7 +1,7 @@
 package ua.goit.model.jdbc;
 
-import java.util.Date;
-
+import java.sql.Date;
+import java.util.Set;
 
 
 public class Developer implements Model {
@@ -12,10 +12,14 @@ public class Developer implements Model {
     private Date dateOfBirth;
     private Date dateOfJoin;
     private String Address;
-    private int companyId;
+    private Company company;
+    private Set<Skill> skills;
 
+    public Developer() {
+    }
 
-    public Developer(int delevoperId, String surname, String name, String fatherName, Date dateOfBirth, Date dateOfJoin, String address, int companyId) {
+    public Developer(int delevoperId, String surname, String name, String fatherName, Date dateOfBirth,
+                     Date dateOfJoin, String address, Company company, Set<Skill> skills) {
         this.delevoperId = delevoperId;
         this.surname = surname;
         this.name = name;
@@ -23,7 +27,8 @@ public class Developer implements Model {
         this.dateOfBirth = dateOfBirth;
         this.dateOfJoin = dateOfJoin;
         Address = address;
-        this.companyId = companyId;
+        this.company = company;
+        this.skills = skills;
     }
 
     public int getDelevoperId() {
@@ -32,14 +37,6 @@ public class Developer implements Model {
 
     public void setDelevoperId(int delevoperId) {
         this.delevoperId = delevoperId;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
     }
 
     public String getSurname() {
@@ -90,6 +87,22 @@ public class Developer implements Model {
         Address = address;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
     @Override
     public String toString() {
         return "Developer : " +
@@ -100,6 +113,7 @@ public class Developer implements Model {
                 ", Date of Birth : " + dateOfBirth +
                 ", Date of Join : " + dateOfJoin +
                 ", Address : " + Address + '\'' +
-                ", Company Id : " + companyId;
+                ", Company : " + company +
+                ", Skills : " + skills;
     }
 }

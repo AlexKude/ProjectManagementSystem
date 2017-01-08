@@ -4,12 +4,10 @@ import ua.goit.dao.jdbc.ModelDao;
 import ua.goit.dao.jdbc.SkillDao;
 import ua.goit.factory.jdbc.ModelFactory;
 import ua.goit.factory.jdbc.SkillFactory;
+import ua.goit.model.jdbc.Skill;
 import ua.goit.view.ConsoleHelper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class SkillCommand implements Command {
@@ -19,7 +17,7 @@ public class SkillCommand implements Command {
         ModelDao dao = new SkillDao();
 
         int id;
-        List list = new ArrayList();
+        Skill skill = new Skill();
         ConsoleHelper.writeMessage("* * * SKILLS * * *" + "\n" +
                 "1 - CREATE | 2 - DELETE | 3 - UPDATE | 4 - SHOW ALL SKILLS | 5 - SHOW SELECTED SKILLS\n");
         try {
@@ -27,8 +25,8 @@ public class SkillCommand implements Command {
             switch (commandNumber) {
                 case 1:
                     ConsoleHelper.writeMessage("Type name of Skill: ");
-                    list.add(ConsoleHelper.readString());
-                    factory.createElement(list);
+                    skill.setSkillName(ConsoleHelper.readString());
+                    factory.createElement(skill);
                     break;
                 case 2:
                     ConsoleHelper.writeMessage("Type skill Id which you like to delete:");
@@ -37,10 +35,10 @@ public class SkillCommand implements Command {
                     break;
                 case 3:
                     ConsoleHelper.writeMessage("Type skill Id which you like to update:");
-                    list.add(ConsoleHelper.readInt());
+                    skill.setSkillId(ConsoleHelper.readInt());
                     ConsoleHelper.writeMessage("Type name of Skill:");
-                    list.add(ConsoleHelper.readString());
-                    dao.updateElement(list);
+                    skill.setSkillName(ConsoleHelper.readString());
+                    dao.updateElement(skill);
                     break;
                 case 4:
                     dao.selectAllElements();

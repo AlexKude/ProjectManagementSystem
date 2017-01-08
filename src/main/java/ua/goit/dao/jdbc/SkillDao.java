@@ -12,7 +12,7 @@ import java.util.List;
 
 
 
-public class SkillDao implements ModelDao {
+public class SkillDao<ModelObject> implements ModelDao<ModelObject> {
     @Override
     public void selectAllElements() {
         try {
@@ -40,10 +40,11 @@ public class SkillDao implements ModelDao {
     }
 
     @Override
-    public void createElement(List list) {
+    public void createElement(ModelObject object) {
+        Skill skill = (Skill) object;
         String sql = "INSERT INTO skills (skill_name) VALUES(?)";
         try (PreparedStatement preparedStatement = ConnectDao.connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, (String) list.get(0));
+            preparedStatement.setString(1, skill.getSkillName());
             preparedStatement.executeUpdate();
             ConsoleHelper.writeMessage("Skill was successfully created!");
         } catch (SQLException e) {
@@ -52,11 +53,12 @@ public class SkillDao implements ModelDao {
     }
 
     @Override
-    public void updateElement(List list) {
+    public void updateElement(ModelObject object) {
+        Skill skill = (Skill) object;
         String sql = "UPDATE skills SET skill_name = ? WHERE id =?";
         try (PreparedStatement preparedStatement = ConnectDao.connection.prepareStatement(sql)) {
-            preparedStatement.setString(1,(String)list.get(1));
-            preparedStatement.setInt(2,(Integer)list.get(0));
+            preparedStatement.setString(1,skill.getSkillName());
+            preparedStatement.setInt(2,skill.getSkillId());
             preparedStatement.executeUpdate();
             ConsoleHelper.writeMessage("Skill was successfully updated!");
         } catch (SQLException e) {

@@ -1,9 +1,7 @@
 package ua.goit.factory.jdbc;
 
-import java.util.List;
 
 
-
-public interface ModelFactory {
-    void createElement(List list);
+public interface ModelFactory <ModelObject> {
+    void createElement(ModelObject object);
 }

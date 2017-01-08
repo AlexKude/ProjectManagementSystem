@@ -12,7 +12,7 @@ import java.util.List;
 
 
 
-public class CompanyDao implements ModelDao {
+public class CompanyDao<ModelObject> implements ModelDao<ModelObject> {
 
     @Override
     public void selectAllElements() {
@@ -41,11 +41,12 @@ public class CompanyDao implements ModelDao {
     }
 
     @Override
-    public void createElement(List list) {
+    public void createElement(ModelObject object) {
+        Company company = (Company) object;
         String sql = "INSERT INTO companies (company_name, company_address) VALUES(?, ?)";
         try ( PreparedStatement preparedStatement = ConnectDao.connection.prepareStatement(sql)){
-            preparedStatement.setString(1,(String)list.get(0));
-            preparedStatement.setString(2,(String)list.get(1));
+            preparedStatement.setString(1,company.getCompanyName());
+            preparedStatement.setString(2,company.getCompanyAddress());
             preparedStatement.executeUpdate();
             ConsoleHelper.writeMessage("Company was successfully created!");
         } catch (SQLException e) {
@@ -54,12 +55,13 @@ public class CompanyDao implements ModelDao {
     }
 
     @Override
-    public void updateElement(List list) {
+    public void updateElement(ModelObject object) {
+        Company company = (Company) object;
         String sql = "UPDATE companies SET company_name = ?,company_address = ? WHERE id =?";
         try (PreparedStatement preparedStatement = ConnectDao.connection.prepareStatement(sql)) {
-            preparedStatement.setString(1,(String)list.get(1));
-            preparedStatement.setString(2,(String)list.get(2));
-            preparedStatement.setInt(3,(Integer)list.get(0));
+            preparedStatement.setString(1,company.getCompanyName());
+            preparedStatement.setString(2,company.getCompanyAddress());
+            preparedStatement.setInt(3,company.getCompanyId());
             preparedStatement.executeUpdate();
             ConsoleHelper.writeMessage("Company was successfully updated!");
         } catch (SQLException e) {

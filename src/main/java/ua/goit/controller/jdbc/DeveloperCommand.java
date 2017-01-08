@@ -4,12 +4,14 @@ import ua.goit.dao.jdbc.DeveloperDao;
 import ua.goit.dao.jdbc.ModelDao;
 import ua.goit.factory.jdbc.DeveloperFactory;
 import ua.goit.factory.jdbc.ModelFactory;
+import ua.goit.model.jdbc.Company;
+import ua.goit.model.jdbc.Developer;
+import ua.goit.model.jdbc.Skill;
 import ua.goit.view.ConsoleHelper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class DeveloperCommand implements Command {
@@ -19,7 +21,10 @@ public class DeveloperCommand implements Command {
         ModelDao dao = new DeveloperDao();
 
         int id;
-        List list = new ArrayList();
+        int skillId;
+        Developer developer = new Developer();
+        Company company = new Company();
+        Set<Skill> skills = new HashSet<>();
         ConsoleHelper.writeMessage("* * * DEVELOPERS * * *" + "\n" +
                 "1 - CREATE | 2 - DELETE | 3 - UPDATE | 4 - SHOW ALL DEVELOPERS | 5 - SHOW SELECTED DEVELOPER\n");
         try {
@@ -27,22 +32,35 @@ public class DeveloperCommand implements Command {
             switch (commandNumber) {
                 case 1:
                     ConsoleHelper.writeMessage("Type developer Family name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setSurname(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type deleloper First name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type developer Father name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setFatherName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type deleloper developer date of birth:");
                     ConsoleHelper.writeMessage("Date format - yyyy-MM-dd");
-                    list.add(ConsoleHelper.readDate());
+                    developer.setDateOfBirth(ConsoleHelper.readDate());
                     ConsoleHelper.writeMessage("Type deleloper developer date of join:");
                     ConsoleHelper.writeMessage("Date format - yyyy-MM-dd");
-                    list.add(ConsoleHelper.readDate());
+                    developer.setDateOfJoin(ConsoleHelper.readDate());
                     ConsoleHelper.writeMessage("Type developer address:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setAddress(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type developer company id:");
-                    list.add(ConsoleHelper.readInt());
-                    factory.createElement(list);
+                    company.setCompanyId(ConsoleHelper.readInt());
+                    developer.setCompany(company);
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type developer skill id OR type 0 if like to create developer");
+                        skillId = ConsoleHelper.readInt();
+                        if (skillId != 0) {
+                            Skill skill = new Skill();
+                            skill.setSkillId(skillId);
+                            skills.add(skill);
+                        } else {
+                            break;
+                        }
+                    }
+                    developer.setSkills(skills);
+                    factory.createElement(developer);
                     break;
                 case 2:
                     ConsoleHelper.writeMessage("Type developer Id which you like to delete:");
@@ -51,24 +69,37 @@ public class DeveloperCommand implements Command {
                     break;
                 case 3:
                     ConsoleHelper.writeMessage("Type developer Id which you like to update:");
-                    list.add(ConsoleHelper.readInt());
+                    developer.setDelevoperId(ConsoleHelper.readInt());
                     ConsoleHelper.writeMessage("Type developer Family name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setSurname(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type deleloper First name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type developer Father name:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setFatherName(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type deleloper developer date of birth:");
                     ConsoleHelper.writeMessage("Date format- yyyy-MM-dd");
-                    list.add(ConsoleHelper.readDate());
+                    developer.setDateOfBirth(ConsoleHelper.readDate());
                     ConsoleHelper.writeMessage("Type deleloper developer date of join:");
                     ConsoleHelper.writeMessage("Date format- yyyy-MM-dd");
-                    list.add(ConsoleHelper.readDate());
+                    developer.setDateOfJoin(ConsoleHelper.readDate());
                     ConsoleHelper.writeMessage("Type developer address:");
-                    list.add(ConsoleHelper.readString());
+                    developer.setAddress(ConsoleHelper.readString());
                     ConsoleHelper.writeMessage("Type developer company id:");
-                    list.add(ConsoleHelper.readInt());
-                    dao.updateElement(list);
+                    company.setCompanyId(ConsoleHelper.readInt());
+                    developer.setCompany(company);
+                    while (true) {
+                        ConsoleHelper.writeMessage("Type developer skill id OR type 0 if like to update developer");
+                        skillId = ConsoleHelper.readInt();
+                        if (skillId != 0) {
+                            Skill skill = new Skill();
+                            skill.setSkillId(skillId);
+                            skills.add(skill);
+                        } else {
+                            break;
+                        }
+                    }
+                    developer.setSkills(skills);
+                    dao.updateElement(developer);
                     break;
                 case 4:
                     dao.selectAllElements();

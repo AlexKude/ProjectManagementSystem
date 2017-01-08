@@ -6,6 +6,9 @@ public class Company implements Model {
     private String companyName;
     private String companyAddress;
 
+    public Company() {
+    }
+
     public Company(int companyId, String companyName, String companyAddress) {
         this.companyId = companyId;
         this.companyName = companyName;
@@ -41,6 +44,6 @@ public class Company implements Model {
         return "Company: " +
                 "Id : " + companyId +
                 ", Name : " + companyName + '\'' +
-                ", Address : " + companyAddress + '\'';
+                ", Address : " + companyAddress;
     }
 }

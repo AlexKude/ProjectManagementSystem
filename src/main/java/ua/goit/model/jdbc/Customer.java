@@ -1,19 +1,26 @@
 package ua.goit.model.jdbc;
 
 
+import java.util.Set;
+
 public class Customer implements Model {
     private int customerId;
     private String surname;
     private String name;
     private String fatherName;
-    private int companyId;
+    private Company company;
+    Set<Project> projectSet;
 
-     public Customer(int customerId, String surname, String name, String fatherName, int companyId) {
+    public Customer() {
+    }
+
+    public Customer(int customerId, String surname, String name, String fatherName, Company company, Set<Project> projectSet) {
         this.customerId = customerId;
         this.surname = surname;
         this.name = name;
         this.fatherName = fatherName;
-        this.companyId = companyId;
+        this.company = company;
+        this.projectSet = projectSet;
     }
 
     public int getCustomerId() {
@@ -22,14 +29,6 @@ public class Customer implements Model {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
     }
 
     public String getSurname() {
@@ -56,13 +55,30 @@ public class Customer implements Model {
         this.fatherName = fatherName;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<Project> getProjectSet() {
+        return projectSet;
+    }
+
+    public void setProjectSet(Set<Project> projectSet) {
+        this.projectSet = projectSet;
+    }
+
     @Override
     public String toString() {
         return "Customer : " +
-                "Id : " + customerId +
-                ", Family Name : " + surname + '\'' +
-                ", First Name : " + name + '\'' +
-                ", Father Name : " + fatherName + '\'' +
-                ", Company Id : " + companyId;
+                "id : " + customerId +
+                ", Family name : " + surname + '\'' +
+                ", First name : " + name + '\'' +
+                ", Father name : " + fatherName + '\'' +
+                ", Company : " + company +
+                ", Projects ; " + projectSet;
     }
 }

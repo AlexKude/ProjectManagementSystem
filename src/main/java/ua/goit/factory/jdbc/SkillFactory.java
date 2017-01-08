@@ -2,16 +2,13 @@ package ua.goit.factory.jdbc;
 
 import ua.goit.dao.jdbc.ModelDao;
 import ua.goit.dao.jdbc.SkillDao;
-import ua.goit.factory.jdbc.ModelFactory;
-
-import java.util.List;
 
 
 
-public class SkillFactory implements ModelFactory {
+public class SkillFactory<ModelObject> implements ModelFactory<ModelObject> {
     @Override
-    public void createElement(List list) {
+    public void createElement(ModelObject object) {
         ModelDao modelDao = new SkillDao();
-        modelDao.createElement(list);
+        modelDao.createElement(object);
     }
 }
